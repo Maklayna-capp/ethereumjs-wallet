@@ -7,7 +7,7 @@ export { default as thirdparty } from './thirdparty'
 
 const bs58check = require('bs58check')
 const randomBytes = require('randombytes')
-const scryptsy = require('@web3-js/scrypt-shim')
+const scryptsy = require('./scrypt')
 const uuidv4 = require('uuid/v4')
 
 // parameters for the toV3() method
