@@ -642,14 +642,14 @@ describe('.fromV3()', function() {
   })
   it('should work with Scrypt', async function() {
     const sample =
-      '{"address":"2f91eb73a6cd5620d7abb50889f24eea7a6a4feb","crypto":{"cipher":"aes-128-ctr","cipherparams":{"iv":"a2bc4f71e8445d64ceebd1247079fbd8"},"ciphertext":"6b9ab7954c9066fa1e54e04e2c527c7d78a77611d5f84fede1bd61ab13c51e3e","kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"r":1,"p":8,"salt":"caf551e2b7ec12d93007e528093697a4c68e8a50e663b2a929754a8085d9ede4"},"mac":"506cace9c5c32544d39558025cb3bf23ed94ba2626e5338c82e50726917e1a15"},"id":"1b3cad9b-fa7b-4817-9022-d5e598eb5fe3","version":3}'
+      '{"address":"635319a1b587fd10cb5a1fa6fb61b751c5146ddb","crypto":{"cipher":"aes-128-ctr","cipherparams":{"iv":"a2bc4f71e8445d64ceebd1247079fbd8"},"ciphertext":"6b9ab7954c9066fa1e54e04e2c527c7d78a77611d5f84fede1bd61ab13c51e3e","kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"r":8,"p":8,"salt":"caf551e2b7ec12d93007e528093697a4c68e8a50e663b2a929754a8085d9ede4"},"mac":"9b1648b83c5d007fa0c201929d3d0d017aa2e9bb4dfc05768c1894a1cdd64ed3"},"id":"1b3cad9b-fa7b-4817-9022-d5e598eb5fe3","version":3}'
     const pw = 'testtest'
     const wallet = Wallet.fromV3(sample, pw)
     const sampleRandom = Wallet.generate().toV3String(pw)
     const walletRandom = Wallet.fromV3(sampleRandom, pw)
 
     this.timeout(0) // never
-    assert.strictEqual(wallet.getAddressString(), '0x2f91eb73a6cd5620d7abb50889f24eea7a6a4feb')
+    assert.strictEqual(wallet.getAddressString(), '0x635319a1b587fd10cb5a1fa6fb61b751c5146ddb')
     assert.strictEqual(
       wallet.getAddressString(),
       (await ethersWallet.fromEncryptedJson(sample, pw)).address.toLowerCase(),
@@ -661,10 +661,10 @@ describe('.fromV3()', function() {
   })
   it("should work with 'unencrypted' wallets", function() {
     const w =
-      '{"address":"a9886ac7489ecbcbd79268a79ef00d940e5fe1f2","crypto":{"cipher":"aes-128-ctr","cipherparams":{"iv":"c542cf883299b5b0a29155091054028d"},"ciphertext":"0a83c77235840cffcfcc5afe5908f2d7f89d7d54c4a796dfe2f193e90413ee9d","kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"r":1,"p":8,"salt":"699f7bf5f6985068dfaaff9db3b06aea8fe3dd3140b3addb4e60620ee97a0316"},"mac":"613fed2605240a2ff08b8d93ccc48c5b3d5023b7088189515d70df41d65f44de"},"id":"0edf817a-ee0e-4e25-8314-1f9e88a60811","version":3}'
+      '{"address":"d599d8909e42b93a9c0dbcd4c0adf99b4057ed3f","crypto":{"cipher":"aes-128-ctr","cipherparams":{"iv":"c542cf883299b5b0a29155091054028d"},"ciphertext":"0a83c77235840cffcfcc5afe5908f2d7f89d7d54c4a796dfe2f193e90413ee9d","kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"r":8,"p":8,"salt":"699f7bf5f6985068dfaaff9db3b06aea8fe3dd3140b3addb4e60620ee97a0316"},"mac":"c5614f6b9e6572dda794007400833d9ce2465bcfcdb29d85f15bdc6a398885ba"},"id":"0edf817a-ee0e-4e25-8314-1f9e88a60811","version":3}'
     const wallet = Wallet.fromV3(w, '')
     this.timeout(0) // never
-    assert.strictEqual(wallet.getAddressString(), '0xa9886ac7489ecbcbd79268a79ef00d940e5fe1f2')
+    assert.strictEqual(wallet.getAddressString(), '0xd599d8909e42b93a9c0dbcd4c0adf99b4057ed3f')
   })
   it('should fail with invalid password', function() {
     const w =
